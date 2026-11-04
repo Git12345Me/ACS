@@ -16,13 +16,14 @@
 ---
 
 ## ACS - Project
-ACS is a lightweight Clash of Clans game server. It has been written by **Astral & Gamemaster2022** from **Greedycell & Apexpowa**.
-The goal of this emulator is to ensure a clean, easy-to-understand code environment. ACS uses async operators and MongoDB servers will be used to save players/clans.
+ACS is a lightweight Clash of Clans game server. It has been written by **Astral & Gamemaster2022** from **Greedycell & Apexpowa & Di5corder & ṂỖĤÃṂÃĎ**.
+
+The goal of this emulator is to ensure a clean, easy-to-understand code environment. ACS uses async operators and Mysql servers will be used to save players table.
 
 ---
 
 ## Features
-- Saving villages, buildings, defences, traps, heroes, decorations, battles, leagues, visit bases, proxy
+- Saving villages, buildings, defences, traps, heroes, decorations, battles, leagues, visit bases, proxy , war bases and more.
 
 ---
 
@@ -31,7 +32,9 @@ The goal of this emulator is to ensure a clean, easy-to-understand code environm
 Make sure you have the following installed:
 
 - [Node.js](https://nodejs.org)
-- [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+- [MySQL](https://www.mysql.com)
+- Or
+- [Xampp](https://www.apachefriends.org)
 
 ---
 
@@ -43,7 +46,7 @@ git clone https://github.com/Apexpowa/ACS.git
 cd ACS
 ```
 
-### 2. Install dependencies
+### 2. Initial dependencies
 ```bash
 npm install
 ```
@@ -60,6 +63,10 @@ node .
 After starting the server, use the **Apexpowa client** available in the **Releases** section to play the game.
 
 ---
+
+## Note
+
+**Node JS 16** **Require** !! Compitable with Old System !!
 
 ## Screenshots
 
