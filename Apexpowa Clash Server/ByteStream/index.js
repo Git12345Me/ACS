@@ -324,6 +324,15 @@ class ByteStream {
   }
 
   /**
+   * Reading Byte from Bytes
+   * @returns { Number } Byte (0-255)
+   */
+  readByte () {
+    this.bitOffset = 0
+    return this.buffer[this.offset++]
+  }
+
+  /**
    * Writing value to Bytes as Byte
    * @param {Number} value Your value to write.
    */
@@ -403,6 +412,23 @@ class ByteStream {
   async send () {
     if (this.id < 20000) return
     await this.encode()
+
+    // Remember recent sends so index.js can identify which packet preceded a disconnect.
+    // UnlockAccountOk (20132) contains the destination village's login token; retain only its
+    // length and never keep its plaintext body in the diagnostic ring buffer.
+    // KeepAliveOk (20108) is skipped: it is sent all the time and would hide the real cause.
+    if (this.client.sentLog && this.id !== 20108) {
+      const sensitive = this.id === 20132
+      this.client.sentLog.push({
+        id: this.id,
+        name: this.constructor.name,
+        at: Date.now(),
+        payloadLength: this.buffer.length,
+        sensitive,
+        ...(sensitive ? {} : { payload: Buffer.from(this.buffer) })
+      })
+      if (this.client.sentLog.length > 6) this.client.sentLog.shift()
+    }
 
     this.buffer = this.client.crypto.encrypt(this.buffer)
 
