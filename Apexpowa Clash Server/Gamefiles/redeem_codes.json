@@ -1,0 +1,8 @@
+{
+  "_help": "Each code gives gems to the first 'maxPlayers' players who type /redeem <code> in chat, one time per village, until 'expires' (UTC, YYYY-MM-DD or YYYY-MM-DD HH:MM). Edit this file any time: it is re-read on every /redeem, no restart needed. showGemsNow true (default) sends the home data right after a redeem so the gems show at once, without a reload; false saves them for the next load. reloadAfterRedeem true makes the game reload right after a redeem so the gems show at once; false only saves them (they show the next time the game loads).",
+  "showGemsNow": true,
+  "reloadAfterRedeem": false,
+  "codes": [
+    { "code": "WELCOME", "gems": 500, "maxPlayers": 10, "expires": "2027-01-01 00:00" }
+  ]
+}

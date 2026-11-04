@@ -1,0 +1,5 @@
+{
+  "_help": "Footprint (width, height) of buildings, traps and decorations that are not in the csv files, so obstacles never appear on top of them. Format: id: [width, height]. The hero altars (1000022, 1000025) are already known (3x3). Anything unknown is treated as 3x3 (buildings) or 2x2 (traps, decorations).",
+  "1000022": [3, 3],
+  "1000025": [3, 3]
+}

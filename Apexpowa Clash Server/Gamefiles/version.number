@@ -1,0 +1,9 @@
+#Wed, 06 Jun 2012 20:15:31 +0300
+#build version number file
+
+version=1
+
+#do not edit this otherwise than change this to 0 when you update version or revision number
+build=70
+
+content_revision=1

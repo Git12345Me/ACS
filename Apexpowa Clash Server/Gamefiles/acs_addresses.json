@@ -1,0 +1,11 @@
+{
+  "_comment": "Client-build specific values used by verify_acs.py. The defaults below are the ones in your verify_wars.py / verify_clans.py (client 8.709.23). For YOUR libg.so use the values your emulator session already knows; every field can also be given on the command line.",
+  "factory": "0x1e0078",
+  "set_bytes": "0x25ce54",
+  "reset_stream": "0x25ce82",
+  "stream_offset": 8,
+  "pos_offset": 16,
+  "pos2_offset": 24,
+  "decode_slot": 12,
+  "encode_slot": 8
+}

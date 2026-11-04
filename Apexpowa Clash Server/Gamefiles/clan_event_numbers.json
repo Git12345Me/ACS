@@ -1,0 +1,11 @@
+{
+  "_help": "Numbers the game uses for clan chat events. null = not known yet (the server then sends a plain chat line instead). Saved when changed - no server restart needed. Find numbers with the /events game command (open the clan chat; each entry is named after its own number).",
+  "KICKED": 1,
+  "ACCEPTED": 2,
+  "JOINED": 3,
+  "LEFT": 4,
+  "DEMOTED": 6,
+  "PROMOTED": 5,
+  "DONATE_ENTRIES": true,
+  "SEND_ALLIANCE_UNITS": true
+}
