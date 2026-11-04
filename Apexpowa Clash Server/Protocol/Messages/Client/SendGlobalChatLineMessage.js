@@ -3,6 +3,7 @@ const GlobalChatLineMessage = require('../Server/GlobalChatLineMessage')
 const VisitedHomeDataMessage = require('../Server/VisitedHomeDataMessage')
 const GlobalChatMessages = require('../../../Core/GlobalChatMessages')
 const GlobalChatManager = require('../../../Core/GlobalChatManager')
+const AccountCommands = require('../../../Core/AccountCommands')
 
 class SendGlobalChatLineMessage extends PiranhaMessage {
   constructor (bytes, client) {
@@ -51,6 +52,9 @@ class SendGlobalChatLineMessage extends PiranhaMessage {
           
           break
         }
+        default:
+          // /register /login /switch ... (main accounts); never shown to other players
+          await AccountCommands.handle(this.client, this.data.Message)
       }
     }
     else {

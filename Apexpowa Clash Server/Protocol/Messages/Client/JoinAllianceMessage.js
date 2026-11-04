@@ -2,6 +2,7 @@ const PiranhaMessage = require('../../PiranhaMessage')
 const AvailableServerCommandMessage = require('../Server/AvailableServerCommandMessage')
 const OutOfSyncMessage = require('../Server/OutOfSyncMessage')
 const ServerErrorMessage = require('../Server/ServerErrorMessage')
+const { postClanEvent } = require('../../../Core/ClanEvents')
 
 class JoinAllianceMessage extends PiranhaMessage {
   constructor (bytes, client) {
@@ -14,8 +15,11 @@ class JoinAllianceMessage extends PiranhaMessage {
   async decode () {
     this.data = {}
 
-    this.data.ClanHighID = this.readLong()[0]
-    this.data.ClanLowID = this.readLong()[1]
+    // One LONG: the id of the clan to join, as [high, low]. (It used to read two longs and take
+    // the high of the first and the low of the second, which gave 0-0 for a clan like 0-5.)
+    const [high, low] = this.readLong()
+    this.data.ClanHighID = high
+    this.data.ClanLowID = low
 
     //console.log(this.data)
   }
@@ -37,8 +41,10 @@ class JoinAllianceMessage extends PiranhaMessage {
         return
       }
 
-      await db.joinClan(player, clan)
+      const joined = await db.joinClan(player, clan)
       await new AvailableServerCommandMessage(this.client, 1).send()
+      // clan chat: "<name> joined the clan" (green) for every member that is online, saved for the others
+      try { await postClanEvent(db, joined || clan, { eventName: 'JOINED', target: player }) } catch (e) { console.error(e) }
     } catch (e) {
       await new ServerErrorMessage(this.client, e.message || "Failed to join clan.").send()
       console.error(e)

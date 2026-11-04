@@ -1,5 +1,6 @@
 const PiranhaMessage = require('../../PiranhaMessage')
 const AvailableServerCommandMessage = require('../Server/AvailableServerCommandMessage')
+const { addExperience } = require('../../../Core/ExperienceUtils')
 
 class ChangeAvatarNameMessage extends PiranhaMessage {
   constructor (bytes, client) {
@@ -28,7 +29,7 @@ class ChangeAvatarNameMessage extends PiranhaMessage {
     this.client.player.name = this.data.Name
     this.client.player.nameChangesCount += 1
     this.client.player.tutorialSteps = 35
-    this.client.player.xpPoints += 7
+    addExperience(this.client.player, 7)
 
     this.client.player.markModified('name')
     this.client.player.markModified('nameChangesCount')
