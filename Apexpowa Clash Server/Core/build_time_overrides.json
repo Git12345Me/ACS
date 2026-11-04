@@ -1,0 +1,4 @@
+{
+  "_help": "Optional. Exact upgrade times (in SECONDS) for buildings that are not in buildings.csv. Key = building data id, value = list of times to reach level 2, 3, 4 ... Entries starting with _ are ignored.",
+  "_example_xbow": { "1000021": [86400, 172800, 259200] }
+}
