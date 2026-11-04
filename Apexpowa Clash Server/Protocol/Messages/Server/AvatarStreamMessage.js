@@ -1,5 +1,7 @@
 const PiranhaMessage = require('../../PiranhaMessage')
+const { getInbox, writeAvatarStreamEntry } = require('../../../Core/AvatarStream')
 
+// 24411: the player's whole inbox (clan mail ...), sent at login and whenever the client asks for it.
 class AvatarStreamMessage extends PiranhaMessage {
   constructor (client) {
     super()
@@ -9,25 +11,10 @@ class AvatarStreamMessage extends PiranhaMessage {
   }
 
   async encode () {
-    /*
-    Defence = 2
-    JoinRefused = 3
-    Invitation = 4
-    RemovedClan = 5
-    ClanMail = 6
-    Attack = 7
-    */
-
-    this.writeInt(6) // Count
-
-    {
-      this.writeString('Hello!') // Message
-      this.writeByte(1) // BOOM
-      this.writeLong(0, 1) // SenderHighID, SenderLowID
-      this.writeLong(0, 1) // AllianceHighID, AllianceLowID
-      this.writeString('Clashers') // AllianceName
-      this.writeInt(13000000) // AllianceBadge
-    }
+    const list = getInbox(this.client.player)
+    this.writeInt(list.length)
+    for (const entry of list) writeAvatarStreamEntry(this, entry)
+    this.client.log(`[Logic] mail: sent the inbox (${list.length} mail(s))`)
   }
 }
 

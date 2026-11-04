@@ -1,6 +1,7 @@
 const PiranhaMessage = require('../../PiranhaMessage')
 const LogicJoinAllianceCommand = require('../../Commands/Server/LogicJoinAllianceCommand')
 const LogicChangeAvatarNameCommand = require('../../Commands/Server/LogicChangeAvatarNameCommand')
+const LogicAllianceSettingChangedCommand = require('../../Commands/Server/LogicAllianceSettingChangedCommand')
 
 class AvailableServerCommandMessage extends PiranhaMessage {
   constructor (client, commandID) {
@@ -14,7 +15,8 @@ class AvailableServerCommandMessage extends PiranhaMessage {
   async encode () {
     var commands = {
       1: LogicJoinAllianceCommand,
-      3: LogicChangeAvatarNameCommand
+      3: LogicChangeAvatarNameCommand,
+      6: LogicAllianceSettingChangedCommand
     }
 
     if (this.commandID in commands) {

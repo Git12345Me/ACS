@@ -17,7 +17,10 @@ class EnemyHomeDataMessage extends PiranhaMessage {
     // Someone
     {
       new ClientHome().encode(this, this.enemy, 0)
+      // the storage "Max:" bars in attack mode must be the attacker's own (same sum as the home village)
+      try { this.capsOverride = require('../../../Core/ResourceProduction').storageCapacity(JSON.parse(this.client.player.village)) } catch (e) {}
       await new ClientAvatar().encode(this, this.enemy)
+      this.capsOverride = null
     }
 
     await new ClientAvatar().encode(this, this.client.player)
