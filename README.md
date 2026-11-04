@@ -46,12 +46,22 @@ git clone https://github.com/Apexpowa/ACS.git
 cd ACS
 ```
 
-### 2. Initial dependencies
+### 2. Install dependencies
 ```bash
 npm install
 ```
 
-### 3. Start the server
+### 3. Database Import
+- Open Xampp Control Panel start mysql
+- Open Any Browser type localhost
+- Click phpMyAdmin and Click New
+- Type MagicDatabase and press latin1
+- Select utf8mb4_general_ci
+- Click Create
+- Drag & Drop MagicDatabase.sql file
+- After it show succeed , done !
+
+### 4. Start the server
 ```bash
 node .
 ```
