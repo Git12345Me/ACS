@@ -1,25 +1,19 @@
 {
   "name": "apexpowa_clash_server",
-  "version": "1.0.1",
-  "description": "A next-generation Clash of Clans private server emulator written in JavaScript.",
+  "version": "1.0.2",
+  "description": "A Clash of Clans private server emulator written in JavaScript (direct MySQL, Node.js 16+).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=16"
   },
   "keywords": [],
   "author": "apexpowa",
   "license": "ISC",
   "dependencies": {
-    "fs": "^0.0.1-security",
-    "mongoose": "^9.1.4",
-    "net": "^1.0.2",
+    "mysql2": "^3.9.8",
     "simple-rc4": "^0.0.1-b"
-  },
-  "devDependencies": {
-    "eslint": "^8.0.1",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0"
   }
 }

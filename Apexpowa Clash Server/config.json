@@ -5,27 +5,60 @@
         "Debug": true,
         "StreamerMode": true,
         "Versions": [
-            6.56,
-            6.108,
             6.186,
             6.253
         ]
     },
+    "Proxy": {
+        "Enabled": false,
+        "Port": 9340,
+        "UpstreamHost": "127.0.0.1",
+        "UpstreamPort": 9339,
+        "DumpPayload": true,
+        "DecodeKnown": true,
+        "MaxPayloadBytes": 64,
+        "LogToFile": true
+    },
     "Database": {
         "Host": "127.0.0.1",
+        "Port": 3306,
+        "User": "root",
         "Name": "MagicDatabase",
-        "Password": null
+        "Password": "",
+        "ConnectionLimit": 30
     },
     "Player": {
         "StartDefault": false,
-        "StartingScore": 0,
+        "StartingScore": 3200,
         "StartingLevel": 1,
         "StartingExperience": 0,
         "StartingResources": {
-            "Gold": 1000000000,
-            "Mana": 1000000000,
-            "DarkMana": 1000000000,
-            "Diamonds": 1000000000
+            "Gold": 2500,
+            "Mana": 2500,
+            "DarkMana": 1000,
+            "Diamonds": 100000
         }
+    },
+    "ServerMail": {
+        "Enabled": true,
+        "Name": "Server",
+        "Text": "Welcome to Clash Of Clans Server!",
+        "Level": 100
+    },
+    "War": {
+        "MinTeamSize": 10,
+        "TeamSizes": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            40,
+            50
+        ],
+        "PreparationMinutes": 1380,
+        "BattleMinutes": 1440,
+        "ResultMinutes": 1440,
+        "SimulateAttacks": true
     }
 }
