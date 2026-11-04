@@ -18,9 +18,13 @@ class LogicBuyShieldCommand {
     const shield = ShieldData[this.data.ShieldId]
     if (!shield) return
 
-    const now = Date.now()
-    const time = (self.client.player.shieldDurationSeconds && self.client.player.shieldDurationSeconds > now) ? self.client.player.shieldDurationSeconds : now
-    self.client.player.shieldDurationSeconds = time + shield.TimeH * 3600 * 1000
+    // Epoch SECONDS: the column is a 32-bit INT, which cannot hold milliseconds (they were lost on save).
+    const now = Math.floor(Date.now() / 1000)
+    const saved = Number(self.client.player.shieldDurationSeconds) || 0
+    const current = saved > 1e11 ? Math.floor(saved / 1000) : saved
+    const time = current > now ? current : now
+    self.client.player.shieldDurationSeconds = time + shield.TimeH * 3600
+    self.client.player.shieldReduceStep = 0 // a new shield starts the attack reduction again
     self.client.player.diamonds -= shield.Diamonds
 
     self.client.player.markModified('shieldDurationSeconds')

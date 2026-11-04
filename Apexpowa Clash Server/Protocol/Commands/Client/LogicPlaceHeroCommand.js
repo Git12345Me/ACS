@@ -10,7 +10,10 @@ class LogicPlaceHeroCommand {
     //console.log(this.data)
   }
 
-  async process (self) {}
+  async process (self) {
+    self.client.attackDeployed = true
+    ;(self.client.battleEvents = self.client.battleEvents || []).push({ tick: this.data.Unknown, type: 'hero', x: this.data.PositionX, y: this.data.PositionY, id: this.data.HeroID })
+  }
 }
 
 module.exports = LogicPlaceHeroCommand

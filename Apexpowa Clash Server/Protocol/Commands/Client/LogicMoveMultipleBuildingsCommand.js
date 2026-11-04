@@ -22,29 +22,16 @@ class LogicMoveMultipleBuildingsCommand {
       const instanceID = Utils.getInstanceID(obj.id)
       let found = false
 
-      const building = village.buildings[instanceID]
-      if (building) {
-        building.x = obj.x
-        building.y = obj.y
+      // by class (500 building, 504 trap, 506 deco), not by the instance number in every list
+      const list = { 500: village.buildings, 504: village.traps, 506: village.decos }[Utils.getClassID(obj.id)]
+      const item = list && list[instanceID]
+      if (item) {
+        item.x = obj.x
+        item.y = obj.y
         found = true
-        continue
-      }
-      const deco = village.decos[instanceID]
-      if (deco) {
-        deco.x = obj.x
-        deco.y = obj.y
-        found = true
-        continue
-      }
-      const trap = village.traps[instanceID]
-      if (trap) {
-        trap.x = obj.x
-        trap.y = obj.y
-        found = true
-        continue
       }
 
-      if (!found) console.log(obj.id, ' not found.')
+      if (!found) console.log(`[LogicMoveMultipleBuildingsCommand] ${obj.id} not found`)
     }
 
     self.client.player.village = JSON.stringify(village)

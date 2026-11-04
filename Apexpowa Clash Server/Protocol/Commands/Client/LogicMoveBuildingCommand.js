@@ -23,22 +23,13 @@ class LogicMoveBuildingCommand {
     const y = this.data.PositionY
     let moved = false
 
-    const building = village.buildings[instanceID]
-    if (building) {
-      building.x = x
-      building.y = y
-      moved = true
-    }
-    const deco = village.decos[instanceID]
-    if (deco) {
-      deco.x = x
-      deco.y = y
-      moved = true
-    }
-    const trap = village.traps[instanceID]
-    if (trap) {
-      trap.x = x
-      trap.y = y
+    // The class of the id says which list it is in (500 building, 504 trap, 506 deco). Looking the instance number up in
+    // all three lists moved a deco and a trap that happened to have the same number as the building.
+    const list = { 500: village.buildings, 504: village.traps, 506: village.decos }[Utils.getClassID(id)]
+    const item = list && list[instanceID]
+    if (item) {
+      item.x = x
+      item.y = y
       moved = true
     }
 
@@ -47,7 +38,7 @@ class LogicMoveBuildingCommand {
       self.client.player.markModified('village')
       await self.client.player.save()
     } else {
-      console.log(id, ' not found.')
+      console.log(`[LogicMoveBuildingCommand] ${id} not found (x ${x}, y ${y})`)
     }
   }
 }
